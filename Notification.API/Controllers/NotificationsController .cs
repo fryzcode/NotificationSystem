@@ -17,9 +17,12 @@ namespace Notification.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateNotificationCommand command)
+        public async Task<IActionResult> Create(
+            CreateNotificationCommand command,
+            CancellationToken cancellationToken
+            )
         {
-            var id = await _handler.Handle(command);
+            var id = await _handler.Handle(command, cancellationToken);
             return Ok(id);
         }
     }

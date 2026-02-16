@@ -1,5 +1,6 @@
 using Notification.Application.Commands.CreateNotification;
 using Notification.Application.Interfaces;
+using Notification.Infrastructure.Messaging;
 using Notification.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<CreateNotificationHandler>();
+builder.Services.AddSingleton<IEventPublisher, RabbitMqEventPublisher>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
