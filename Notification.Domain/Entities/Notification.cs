@@ -12,6 +12,7 @@ public class NotificationEntity
 {
     public Guid Id { get; private set; }
     public string Recipient { get; private set; }
+    public string Subject { get; private set; }
     public string Message { get; private set; }
     public NotificationStatus Status { get; private set; }
     private readonly List<IDomainEvent> _domainEvents = new();
@@ -21,14 +22,15 @@ public class NotificationEntity
         _domainEvents.Add(domainEvent);
     }
 
-    public NotificationEntity(string recipient, string message)
+    public NotificationEntity(string recipient, string subject, string message)
     {
         Id = Guid.NewGuid();
         Recipient = recipient;
         Message = message;
+        Subject = subject;
         Status = NotificationStatus.Pending;
 
-        AddDomainEvent(new NotificationCreatedDomainEvent(Id, recipient, message));
+        AddDomainEvent(new NotificationCreatedDomainEvent(Id, recipient, message, subject));
     }
     public void MarkAsSent()
     {

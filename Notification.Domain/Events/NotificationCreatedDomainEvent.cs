@@ -11,12 +11,14 @@ namespace Notification.Domain.Events
     {
         public Guid NotificationId { get; }
         public string Recipient { get; }
+        public string Subject { get; set; } = default!;
         public string Message { get; }
         public DateTime OccurredOn { get; }
-        public NotificationCreatedDomainEvent(Guid notificationId, string recipient, string message)
+        public NotificationCreatedDomainEvent(Guid notificationId, string recipient, string subject, string message)
         {
             NotificationId = notificationId;
             Recipient = recipient;
+            Subject = subject;
             Message = message;
             OccurredOn = DateTime.UtcNow;
         }

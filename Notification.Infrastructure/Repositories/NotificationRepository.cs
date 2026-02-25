@@ -26,13 +26,16 @@ public class NotificationRepository : INotificationRepository
         using IDbConnection db = new SqlConnection(connectionString);
 
         var sql = @"
-            INSERT INTO Notifications (Id, Recipient, Message, Status)
-            VALUES (@Id, @Recipient, @Message, @Status)";
+                    INSERT INTO Notifications
+                    (Id, Recipient, Subject, Message, Status)
+                    VALUES
+                    (@Id, @Recipient, @Subject, @Message, @Status)";
 
         await db.ExecuteAsync(sql, new
         {
             Id = notification.Id,
             Recipient = notification.Recipient,
+            Subject = notification.Subject,
             Message = notification.Message,
             Status = notification.Status.ToString()
         });

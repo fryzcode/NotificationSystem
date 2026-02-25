@@ -5,5 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Notification.Application.Commands.CreateNotification;
-public record CreateNotificationCommand(string Recipient, string Message);
+public record CreateNotificationCommand(
+    string Recipient,
+    string Subject,
+    string Message
+);
 

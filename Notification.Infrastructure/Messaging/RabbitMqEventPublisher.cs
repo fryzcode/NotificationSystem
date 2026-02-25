@@ -32,7 +32,9 @@ public class RabbitMqEventPublisher : IEventPublisher
 
     public Task PublishAsync(IDomainEvent domainEvent, CancellationToken cancellationToken = default)
     {
-        var json = JsonSerializer.Serialize(domainEvent);
+        var json = JsonSerializer.Serialize(
+            domainEvent,
+            domainEvent.GetType());
         var body = Encoding.UTF8.GetBytes(json);
 
         _channel.BasicPublish(

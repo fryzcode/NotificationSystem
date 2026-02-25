@@ -24,7 +24,7 @@ public class CreateNotificationHandler
 
     public async Task<Guid> Handle(CreateNotificationCommand command, CancellationToken cancellationToken)
     {
-        var notification = new NotificationEntity(command.Recipient, command.Message);
+        var notification = new NotificationEntity(command.Recipient, command.Subject, command.Message);
 
         await _repository.AddAsync(notification);
 
